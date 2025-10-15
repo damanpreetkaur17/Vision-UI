@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RentCars - Find, book and rent a car Easily</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    body {
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+
+
+    .abstract-bg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 70%;
+      height: 100%;
+      background-color: #f0f8ff;
+      clip-path: polygon(50% 0, 100% 0, 100% 100%, 30% 100%);
+      z-index: 0;
+      transform: scaleX(-1);
+      opacity: 0.5;
+    }
+
+    .icon-bg {
+      background: rgba(0, 102, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .icon-bg:hover {
+      transform: scale(1.1);
+      background: rgba(0, 102, 255, 0.1);
+    }
+
+
+    .btn-primary {
+      background-color: #007bff;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+
+    .text-easy {
+      color: #007bff;
+    }
+
+    .logo-strip {
+      overflow: hidden;
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .brand-track {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 6rem;
+      will-change: transform;
+      align-items: center;
+    }
+
+    .brand-name {
+      flex: none;
+      font-size: 2rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #4b5563;
+      opacity: 0.8;
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-white relative">
+  <div class=" hidden lg:block"></div>
+
+  <div class="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8">
+
+    <header class="flex justify-between items-center py-6">
+      <div class="text-xl font-bold text-gray-800 flex items-center">
+        <span class="text-2xl text-blue-600 mr-2">🚗</span>
+        <span class="text-lg uppercase tracking-wider font-semibold">RentCars</span>
+      </div>
+
+      <nav class="hidden lg:flex space-x-8 text-sm font-medium text-gray-600">
+        <a href="#" class="hover:text-blue-600">Become a renter</a>
+        <a href="#" class="hover:text-blue-600">Rental deals</a>
+        <a href="#" class="hover:text-blue-600">How it works</a>
+        <a href="#" class="hover:text-blue-600">Why choose us</a>
+      </nav>
+
+      <div class="flex items-center space-x-4">
+        <a href="#" class="text-sm font-medium text-gray-600 hover:text-blue-600 hidden sm:block">Sign in</a>
+        <a href="#" class="text-sm font-medium text-white px-4 py-2 rounded-md btn-primary whitespace-nowrap shadow-md">Sign up</a>
+      </div>
+    </header>
+
+    <hr class="border-gray-100 mt-2 mb-12 hidden lg:block" />
+
+    <main class="flex flex-col lg:flex-row items-center justify-between pt-8 pb-16 lg:pb-24">
+      <div class="lg:w-1/2 text-center lg:text-left mb-10 lg:mb-0">
+        <h1 class="text-5xl md:text-6xl font-extrabold text-gray-800 leading-tight mb-4">
+          Find, book and<br />
+          rent a car <span class="text-easy">Easily</span>
+        </h1>
+        <p class="text-lg text-gray-600 mb-8 max-w-md mx-auto lg:mx-0">
+          Get a car wherever and whenever you need it with your iOS and Android device.
+        </p>
+
+        <div class="flex justify-center lg:justify-start space-x-4 mt-6">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+            class="h-12" />
+          <img
+            src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+            class="h-12" />
+        </div>
+      </div>
+
+      <div class="lg:w-1/2 w-full car-image-container relative flex justify-center">
+        <img src="hero.png" alt="Blue sports car"
+          class="w-[100%] h-auto object-cover " />
+      </div>
+    </main>
+
+    <div
+      class="flex flex-col md:flex-row items-center justify-between bg-white shadow-lg rounded-2xl mx-6 lg:mx-16 px-6 py-6 space-y-4 md:space-y-0 md:space-x-4 border border-gray-100">
+      <div class="flex items-center space-x-3 w-full md:w-1/3 border-r border-gray-200 pr-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 11c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7-8-3.134-8-7z" />
+        </svg>
+        <div>
+          <p class="text-sm text-gray-500">Location</p>
+          <p class="font-semibold text-gray-800">Search your location</p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-3 w-full md:w-1/3 border-r border-gray-200 pr-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        <div>
+          <p class="text-sm text-gray-500">Pickup date</p>
+          <p class="font-semibold text-gray-800">Tue 15 Feb, 09:00</p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-3 w-full md:w-1/3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        <div>
+          <p class="text-sm text-gray-500">Return date</p>
+          <p class="font-semibold text-gray-800">Thu 16 Feb, 11:00</p>
+        </div>
+      </div>
+
+      <button
+        class="bg-blue-600 text-white px-8 py-3 rounded-xl hover:bg-blue-700 font-medium shadow-md mt-4 md:mt-0">
+        Search
+      </button>
+    </div>
+
+    <section class="container mx-auto px-4 py-20 text-center">
+      <div class="mb-16">
+        <div
+          class="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-widest text-blue-600 border border-gray-200 rounded-full">
+          How it works
+        </div>
+        <h2 class="text-4xl font-semibold text-gray-800">
+          Rent with following <span class="text-blue-600">3 easy steps</span>
+        </h2>
+      </div>
+
+      <div class="flex flex-col md:flex-row justify-evenly items-center space-y-10 md:space-y-0">
+        <div class="flex flex-col items-center max-w-xs">
+          <div class="icon-bg w-20 h-20 rounded-xl flex items-center justify-center mb-6 shadow-md">
+            <svg class="w-10 h-10 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Choose location</h3>
+          <p class="text-gray-500 text-sm">Pick your preferred car location easily.</p>
+        </div>
+
+        <div class="flex flex-col items-center max-w-xs">
+          <div class="icon-bg w-20 h-20 rounded-xl flex items-center justify-center mb-6 shadow-md">
+            <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Select dates</h3>
+          <p class="text-gray-500 text-sm">Pick your pickup and return dates.</p>
+        </div>
+
+        <div class="flex flex-col items-center max-w-xs">
+          <div class="icon-bg w-20 h-20 rounded-xl flex items-center justify-center mb-6 shadow-md">
+            <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <path
+                d="M17 17h2a1 1 0 011 1v0a1 1 0 01-1 1h-2v-2zM5 17h2v2H5a1 1 0 010-2zm13-8h2a1 1 0 010 2h-2v-2zM4 9h2v2H4a1 1 0 010-2zm8-4l-2.45 5.25H14.45L12 5zm-3.5 10a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm7 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z">
+              </path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Book your car</h3>
+          <p class="text-gray-500 text-sm">Confirm and enjoy your comfortable ride.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="logo-strip py-16 mt-16 border-t border-gray-100">
+      <div class="container mx-auto px-4 relative overflow-hidden">
+        <div class="brand-track">
+          <div class="brand-name">Honda</div>
+          <div class="brand-name">Jaguar</div>
+          <div class="brand-name">Nissan</div>
+          <div class="brand-name">Volvo</div>
+          <div class="brand-name">Audi</div>
+          <div class="brand-name">Acura</div>
+          <div class="brand-name">Tesla</div>
+          <div class="brand-name">BMW</div>
+          <div class="brand-name">Ford</div>
+          <div class="brand-name">Lexus</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <main class="py-8">
+        <section class="relative bg-white overflow-hidden rounded-lg">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-32 ">
+
+
+                <div class="relative h-[800px] md:h-[420px] flex items-center justify-center">
+                    <img src="car.jpg" class="h-[550px] w-[700px]">
+                </div>
+
+                <div class="py-6 md:py-4">
+                    <div class="mb-4">
+                        <span
+                            class="inline-block text-xs font-medium text-sky-600 bg-sky-100 px-3 py-1 h-8 w-40 rounded-lg flex items-center justify-center font-bold">
+                            WHY CHOOSE US
+                        </span>
+                    </div>
+
+                    <h2 class="text-3xl md:text-4xl font-semibold text-slate-900 mb-4">
+                        We offer the best experience <br class="hidden md:inline" /> with our rental deals
+                    </h2>
+
+
+                    <div class="space-y-6">
+
+
+              
+                        <div class=" mt-12 flex items-start gap-4">
+                            <div class="flex-none">
+                                <div
+                                    class="mt-2 w-14 h-14 rounded-lg icon-pill bg-blue-50 flex items-center justify-center">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-sky-600" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <rect x="3" y="11" width="18" height="10" rx="2" stroke-width="1.5"></rect>
+                                        <path d="M7 11V8a5 5 0 0110 0v3" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-semibold text-slate-900">Best price guaranteed</h4>
+                                <p class="pt-2 text-sm text-slate-500">Find a lower price? We’ll refund you 100% <br>of
+                                    the
+                                    difference.</p>
+                            </div>
+                        </div>
+
+                   
+                        <div class="flex items-start gap-4">
+                            <div class="flex-none">
+                                <div
+                                    class="mt-2 w-14 h-14 rounded-lg icon-pill bg-blue-50 flex items-center justify-center">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-sky-600" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path d="M12 12a4 4 0 100-8 4 4 0 000 8z" stroke-width="1.5"></path>
+                                        <path d="M6 20a6 6 0 0112 0" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-semibold text-slate-900">Experienced driver</h4>
+                                <p class="pt-2 text-sm text-slate-500">Don’t have a driver? Don’t worry, we have many
+                                    <br>
+                                    experienced drivers for you.</p>
+                            </div>
+                        </div>
+
+
+            
+                        <div class="flex items-start gap-4">
+                            <div class="flex-none">
+                                <div
+                                    class="mt-2 w-14 h-14 rounded-lg icon-pill bg-blue-50 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-sky-600" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path d="M3 7h13l4 4v6" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round"></path>
+                                        <circle cx="7.5" cy="18.5" r="1.5" stroke-width="1.5"></circle>
+                                        <circle cx="18.5" cy="18.5" r="1.5" stroke-width="1.5"></circle>
+                                    </svg>
+
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-semibold text-slate-900">24 hour car delivery</h4>
+                                <p class="pt-2 text-sm text-slate-500">Book your car anytime and we will deliver it
+                                    <br> directly to you.
+                                </p>
+                            </div>
+                        </div>
+
+
+            
+                        <div class="flex items-start gap-4">
+                            <div class="flex-none">
+                                <div
+                                    class="mt-2 w-14 h-14 rounded-lg icon-pill bg-blue-50 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-sky-600" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path d="M3 11a9 9 0 0118 0v5a2 2 0 01-2 2h-1.5a1.5 1.5 0 01-1.5-1.5V15"
+                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        </path>
+                                        <path d="M3 11v3a2 2 0 002 2h.5" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                        </path>
+                                    </svg>
+
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-semibold text-slate-900">24/7 technical support</h4>
+                                <p class="pt-2 text-sm text-slate-500">Have a question? Contact Rentcars support
+                                    <br>any time
+                                    when you have problems.
+                                </p>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+<section class="bg-white py-20">
+  <div class="container mx-auto px-4 text-center">
+
+    <div class="mb-16">
+      <div class="inline-block px-5 py-1.5 mb-4 text-xs font-semibold uppercase tracking-widest text-blue-600 bg-blue-50 rounded-full">
+        Popular Rental Deals
+      </div>
+      <h2 class="text-4xl font-bold text-gray-800">
+        Most popular cars rental deals
+      </h2>
+    </div>
+
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+      <div class="bg-white shadow-xl rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col">
+        <div class="flex justify-center p-6 bg-gradient-to-b from-gray-50 to-white">
+          <img src="jaguar.jpg" alt="Jaguar XE L P250" class="h-32 object-contain">
+        </div>
+        <div class="p-6 text-left flex-1 flex flex-col">
+          <h3 class="text-gray-800 font-semibold text-lg mb-1">Jaguar XE L P250</h3>
+          <div class="flex items-center text-sm text-gray-500 mb-3">
+            <span class="text-yellow-500 mr-1">★</span>
+            4.8 <span class="ml-1">(2,436 reviews)</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-y-2 text-gray-500 text-sm mb-6">
+            <div class="flex items-center space-x-2"><span>👤</span><span>4 Passengers</span></div>
+            <div class="flex items-center space-x-2"><span>⚙️</span><span>Auto</span></div>
+            <div class="flex items-center space-x-2"><span>❄️</span><span>Air Conditioning</span></div>
+            <div class="flex items-center space-x-2"><span>🚪</span><span>4 Doors</span></div>
+          </div>
+
+          <div class="border-t border-gray-100 pt-4 mt-auto">
+            <div class="flex items-center justify-between">
+              <p class="text-gray-500 text-sm">Price</p>
+              <p class="text-xl font-bold text-gray-800">$1,800 <span class="text-gray-400 text-sm">/day</span></p>
+            </div>
+            <button class="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-all">
+              Rent Now →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white shadow-xl rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col">
+        <div class="flex justify-center p-6 bg-gradient-to-b from-gray-50 to-white">
+          <img src="audi.jpg" alt="Audi R8" class="h-32 object-contain">
+        </div>
+        <div class="p-6 text-left flex-1 flex flex-col">
+          <h3 class="text-gray-800 font-semibold text-lg mb-1">Audi R8</h3>
+          <div class="flex items-center text-sm text-gray-500 mb-3">
+            <span class="text-yellow-500 mr-1">★</span>
+            4.6 <span class="ml-1">(1,936 reviews)</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-y-2 text-gray-500 text-sm mb-6">
+            <div class="flex items-center space-x-2"><span>👤</span><span>2 Passengers</span></div>
+            <div class="flex items-center space-x-2"><span>⚙️</span><span>Auto</span></div>
+            <div class="flex items-center space-x-2"><span>❄️</span><span>Air Conditioning</span></div>
+            <div class="flex items-center space-x-2"><span>🚪</span><span>2 Doors</span></div>
+          </div>
+
+          <div class="border-t border-gray-100 pt-4 mt-auto">
+            <div class="flex items-center justify-between">
+              <p class="text-gray-500 text-sm">Price</p>
+              <p class="text-xl font-bold text-gray-800">$2,100 <span class="text-gray-400 text-sm">/day</span></p>
+            </div>
+            <button class="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-all">
+              Rent Now →
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="bg-white shadow-xl rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col">
+        <div class="flex justify-center p-6 bg-gradient-to-b from-gray-50 to-white">
+          <img src="bmw.jpg" alt="BMW M3" class="h-32 object-contain">
+        </div>
+        <div class="p-6 text-left flex-1 flex flex-col">
+          <h3 class="text-gray-800 font-semibold text-lg mb-1">BMW M3</h3>
+          <div class="flex items-center text-sm text-gray-500 mb-3">
+            <span class="text-yellow-500 mr-1">★</span>
+            4.5 <span class="ml-1">(2,036 reviews)</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-y-2 text-gray-500 text-sm mb-6">
+            <div class="flex items-center space-x-2"><span>👤</span><span>4 Passengers</span></div>
+            <div class="flex items-center space-x-2"><span>⚙️</span><span>Auto</span></div>
+            <div class="flex items-center space-x-2"><span>❄️</span><span>Air Conditioning</span></div>
+            <div class="flex items-center space-x-2"><span>🚪</span><span>4 Doors</span></div>
+          </div>
+
+          <div class="border-t border-gray-100 pt-4 mt-auto">
+            <div class="flex items-center justify-between">
+              <p class="text-gray-500 text-sm">Price</p>
+              <p class="text-xl font-bold text-gray-800">$1,600 <span class="text-gray-400 text-sm">/day</span></p>
+            </div>
+            <button class="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-all">
+              Rent Now →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white shadow-xl rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col">
+        <div class="flex justify-center p-6 bg-gradient-to-b from-gray-50 to-white">
+          <img src="lambo.jpg" alt="Lamborghini Huracan" class="h-32 object-contain">
+        </div>
+        <div class="p-6 text-left flex-1 flex flex-col">
+          <h3 class="text-gray-800 font-semibold text-lg mb-1">Lamborghini Huracan</h3>
+          <div class="flex items-center text-sm text-gray-500 mb-3">
+            <span class="text-yellow-500 mr-1">★</span>
+            4.3 <span class="ml-1">(2,236 reviews)</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-y-2 text-gray-500 text-sm mb-6">
+            <div class="flex items-center space-x-2"><span>👤</span><span>2 Passengers</span></div>
+            <div class="flex items-center space-x-2"><span>⚙️</span><span>Auto</span></div>
+            <div class="flex items-center space-x-2"><span>❄️</span><span>Air Conditioning</span></div>
+            <div class="flex items-center space-x-2"><span>🚪</span><span>2 Doors</span></div>
+          </div>
+
+          <div class="border-t border-gray-100 pt-4 mt-auto">
+            <div class="flex items-center justify-between">
+              <p class="text-gray-500 text-sm">Price</p>
+              <p class="text-xl font-bold text-gray-800">$2,300 <span class="text-gray-400 text-sm">/day</span></p>
+            </div>
+            <button class="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-all">
+              Rent Now →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-14">
+      <button class="px-8 py-3 border border-gray-300 text-gray-700 rounded-full font-medium hover:bg-blue-600 hover:text-white transition">
+        Show all vehicles →
+      </button>
+    </div>
+  </div>
+</section>
+
+
+
+
+    <section style="background-color: #f8f9fa; padding: 50px 0;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+            <div style="flex: 1; padding: 20px;">
+                <p style="
+                    background-color: #e0f0ff; 
+                    color: #007bff; 
+                    padding: 8px 15px; 
+                    display: inline-block; 
+                    border-radius: 5px; 
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    font-size: 0.8em;
+                    letter-spacing: 1px;
+                ">
+                    Download
+                </p>
+                <h1 style="font-size: 3.5em; margin-top: 15px; margin-bottom: 5px; font-weight: 700;">
+                    Download Rentcars <br>App for <span style="color: #007bff;">FREE</span>
+                </h1>
+                <p style="margin-top: 20px; font-size: 1.1em; color: #555;">
+                    For faster, easier booking and exclusive deals.
+                </p>
+                <div class="flex justify-center lg:justify-start space-x-4 mt-6">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+            class="h-12" />
+          <img
+            src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+            class="h-12" />
+        </div>
+
+            </div>
+            
+            <div style="flex: 1; display: flex; justify-content: flex-end;">
+                <img src="pp.png" alt="Rentcars App Mockup" style="max-width: 100%; height: auto;">
+            </div>
+        </div>
+    </section>
+
+    <footer style="background-color: #1a2333; color: #b0b8c4; padding: 60px 0;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; padding-bottom: 40px; border-bottom: 1px solid #3c4354;">
+                
+                <div style="width: 25%; min-width: 250px; margin-bottom: 30px;">
+                    <div style="display: flex; align-items: center; margin-bottom: 25px;">
+                        <span style="font-size: 1.5em; font-weight: bold; color: white;">RENTCARS</span>
+                    </div>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                            <span style="margin-right: 10px; font-size: 1.2em;">&#9906;</span> <span>25566 Hc 1, Glenallen, <br>Alaska, 99588, USA</span>
+                        </li>
+                        <li style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <span style="margin-right: 10px; font-size: 1.2em;">&#9742;</span> <span>+603 4784 273 12</span>
+                        </li>
+                        <li style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <span style="margin-right: 10px; font-size: 1.2em;">&#9993;</span> <span>rentcars.gamil@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="width: 15%; min-width: 150px; margin-bottom: 30px;">
+                    <h3 style="color: white; font-size: 1.1em; margin-bottom: 20px;">Our Product</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: inherit; text-decoration: none;">Career</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: inherit; text-decoration: none;">Car</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: inherit; text-decoration: none;">Packages</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: inherit; text-decoration: none;">Features</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: inherit; text-decoration: none;">Priceline</a></li>
+                    </ul>
+                </div>
+
+                <div style="width: 15%; min-width: 150px; margin-bottom: 30px;">
+                    <h3 style="color: white; font-size: 1.1em; margin-bottom: 20px;">Resources</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: inherit; text-decoration: none;">Download</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: inherit; text-decoration: none;">Help Centre</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: inherit; text-decoration: none;">Guides</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: inherit; text-decoration: none;">Partner Network</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: inherit; text-decoration: none;">Cruises</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: inherit; text-decoration: none;">Developer</a></li>
+                    </ul>
+                </div>
+
+                <div style="width: 20%; min-width: 180px; margin-bottom: 30px;">
+                    <h3 style="color: white; font-size: 1.1em; margin-bottom: 20px;">About Rentcars</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: inherit; text-decoration: none;">Why choose us</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: inherit; text-decoration: none;">Our Story</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: inherit; text-decoration: none;">Investor Relations</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: inherit; text-decoration: none;">Press Center</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: inherit; text-decoration: none;">Advertise</a></li>
+                    </ul>
+                </div>
+
+                <div style="width: 15%; min-width: 150px; margin-bottom: 30px;">
+                    <h3 style="color: white; font-size: 1.1em; margin-bottom: 20px;">Follow Us</h3>
+                    <div style="display: flex; gap: 15px;">
+                        <a href="#" style="color: white; font-size: 1.5em; text-decoration: none;">&#x1F4F7;</a> <a href="#" style="color: white; font-size: 1.5em; text-decoration: none;">&#x1F3A5;</a> </div>
+                </div>
+
+            </div>
+
+            <div style="text-align: left; padding-top: 20px; font-size: 0.9em;">
+                Copyright 2023 • Rentcars. All Rights Reserved
+            </div>
+        </div>
+    </footer>
+
+
+
+  <script>
+    const track = document.querySelector(".brand-track");
+    const container = track.parentNode;
+
+    const clone = track.cloneNode(true);
+    container.appendChild(clone);
+    clone.style.position = "absolute";
+    clone.style.top = "0";
+    clone.style.left = track.scrollWidth + "px";
+
+    function startMarquee() {
+      const distance = track.scrollWidth;
+      const duration = 30; 
+
+      gsap.to([track, clone], {
+        x: -distance,
+        duration: duration,
+        ease: "none",
+        repeat: -1,
+        modifiers: {
+          x: gsap.utils.wrap(-distance, 0),
+        },
+      });
+    }
+
+    startMarquee();
+  </script>
+</body>
+</html>
+
+
