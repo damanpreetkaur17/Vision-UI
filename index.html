@@ -6,95 +6,72 @@
   <title>RentCars - Find, book and rent a car Easily</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-    body {
-      font-family: 'Poppins', sans-serif;
-      overflow-x: hidden;
-    }
+    body { font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+    .abstract-bg { position: absolute; top: 0; right: 0; width: 70%; height: 100%; background-color: #f0f8ff; clip-path: polygon(50% 0, 100% 0, 100% 100%, 30% 100%); z-index: 0; transform: scaleX(-1); opacity: 0.5; }
+    .icon-bg { background: rgba(0, 102, 255, 0.05); transition: all 0.3s ease; }
+    .icon-bg:hover { transform: scale(1.15); background: rgba(0, 102, 255, 0.1); }
+    .btn-primary { background-color: #007bff; transition: all 0.3s ease; }
+    .btn-primary:hover { background-color: #0056b3; transform: scale(1.05); }
+    .text-easy { color: #007bff; }
+    .logo-strip { overflow: hidden; position: relative; white-space: nowrap; }
+    .brand-track { display: flex; flex-wrap: nowrap; gap: 6rem; will-change: transform; align-items: center; }
+    .brand-name { flex: none; font-size: 2rem; font-weight: 700; text-transform: uppercase; color: #4b5563; opacity: 0.8; letter-spacing: 2px; }
+    .card-hover:hover { transform: translateY(-10px) scale(1.02); transition: all 0.4s ease; }
 
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
 
-    .abstract-bg {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 70%;
-      height: 100%;
-      background-color: #f0f8ff;
-      clip-path: polygon(50% 0, 100% 0, 100% 100%, 30% 100%);
-      z-index: 0;
-      transform: scaleX(-1);
-      opacity: 0.5;
-    }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
 
-    .icon-bg {
-      background: rgba(0, 102, 255, 0.05);
-      transition: all 0.3s ease;
-    }
+        .fade-up {
+            animation: fadeUp 1s ease-out forwards;
+        }
 
-    .icon-bg:hover {
-      transform: scale(1.1);
-      background: rgba(0, 102, 255, 0.1);
-    }
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
 
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
 
-    .btn-primary {
-      background-color: #007bff;
-      transition: all 0.3s ease;
-    }
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
 
-    .btn-primary:hover {
-      background-color: #0056b3;
-    }
-
-    .text-easy {
-      color: #007bff;
-    }
-
-    .logo-strip {
-      overflow: hidden;
-      position: relative;
-      white-space: nowrap;
-    }
-
-    .brand-track {
-      display: flex;
-      flex-wrap: nowrap;
-      gap: 6rem;
-      will-change: transform;
-      align-items: center;
-    }
-
-    .brand-name {
-      flex: none;
-      font-size: 2rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: #4b5563;
-      opacity: 0.8;
-      letter-spacing: 2px;
-    }
+        .hover-lift:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
   </style>
 </head>
 
 <body class="min-h-screen bg-white relative">
-  <div class=" hidden lg:block"></div>
-
   <div class="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8">
 
     <header class="flex justify-between items-center py-6">
       <div class="text-xl font-bold text-gray-800 flex items-center">
-        <span class="text-2xl text-blue-600 mr-2">🚗</span>
+        <img src="logo.jpg" alt="RentCars Logo" class="h-8 w-8 mr-2"/>
         <span class="text-lg uppercase tracking-wider font-semibold">RentCars</span>
       </div>
-
       <nav class="hidden lg:flex space-x-8 text-sm font-medium text-gray-600">
-        <a href="#" class="hover:text-blue-600">Become a renter</a>
-        <a href="#" class="hover:text-blue-600">Rental deals</a>
-        <a href="#" class="hover:text-blue-600">How it works</a>
-        <a href="#" class="hover:text-blue-600">Why choose us</a>
+        <a href="#apps" class="hover:text-blue-600">Become a renter</a>
+        <a href="#deals" class="hover:text-blue-600">Rental deals</a>
+        <a href="#how" class="hover:text-blue-600">How it works</a>
+        <a href="#why" class="hover:text-blue-600">Why choose us</a>
       </nav>
-
       <div class="flex items-center space-x-4">
         <a href="#" class="text-sm font-medium text-gray-600 hover:text-blue-600 hidden sm:block">Sign in</a>
         <a href="#" class="text-sm font-medium text-white px-4 py-2 rounded-md btn-primary whitespace-nowrap shadow-md">Sign up</a>
@@ -104,7 +81,7 @@
     <hr class="border-gray-100 mt-2 mb-12 hidden lg:block" />
 
     <main class="flex flex-col lg:flex-row items-center justify-between pt-8 pb-16 lg:pb-24">
-      <div class="lg:w-1/2 text-center lg:text-left mb-10 lg:mb-0">
+      <div class="lg:w-1/2 text-center lg:text-left mb-10 lg:mb-0 hero-text">
         <h1 class="text-5xl md:text-6xl font-extrabold text-gray-800 leading-tight mb-4">
           Find, book and<br />
           rent a car <span class="text-easy">Easily</span>
@@ -112,79 +89,60 @@
         <p class="text-lg text-gray-600 mb-8 max-w-md mx-auto lg:mx-0">
           Get a car wherever and whenever you need it with your iOS and Android device.
         </p>
-
         <div class="flex justify-center lg:justify-start space-x-4 mt-6">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
-            class="h-12" />
-          <img
-            src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-            class="h-12" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" class="h-12 app-badge"/>
+          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" class="h-12 app-badge"/>
         </div>
       </div>
-
       <div class="lg:w-1/2 w-full car-image-container relative flex justify-center">
-        <img src="hero.png" alt="Blue sports car"
-          class="w-[100%] h-auto object-cover " />
+        <img src="hero.png" alt="Blue sports car" class="w-[100%] h-auto object-cover hero-car"/>
       </div>
     </main>
 
-    <div
-      class="flex flex-col md:flex-row items-center justify-between bg-white shadow-lg rounded-2xl mx-6 lg:mx-16 px-6 py-6 space-y-4 md:space-y-0 md:space-x-4 border border-gray-100">
+    <div class="flex flex-col md:flex-row items-center justify-between bg-white shadow-lg rounded-2xl mx-6 lg:mx-16 px-6 py-6 space-y-4 md:space-y-0 md:space-x-4 search-section">
       <div class="flex items-center space-x-3 w-full md:w-1/3 border-r border-gray-200 pr-4">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24"
-          stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M12 11c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7-8-3.134-8-7z" />
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7-8-3.134-8-7z" />
         </svg>
         <div>
           <p class="text-sm text-gray-500">Location</p>
           <p class="font-semibold text-gray-800">Search your location</p>
         </div>
       </div>
-
       <div class="flex items-center space-x-3 w-full md:w-1/3 border-r border-gray-200 pr-4">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24"
-          stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
         <div>
           <p class="text-sm text-gray-500">Pickup date</p>
           <p class="font-semibold text-gray-800">Tue 15 Feb, 09:00</p>
         </div>
       </div>
-
       <div class="flex items-center space-x-3 w-full md:w-1/3">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24"
-          stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
         <div>
           <p class="text-sm text-gray-500">Return date</p>
           <p class="font-semibold text-gray-800">Thu 16 Feb, 11:00</p>
         </div>
       </div>
-
-      <button
-        class="bg-blue-600 text-white px-8 py-3 rounded-xl hover:bg-blue-700 font-medium shadow-md mt-4 md:mt-0">
+      <button class="bg-blue-600 text-white px-8 py-3 rounded-xl hover:bg-blue-700 font-medium shadow-md mt-4 md:mt-0 search-btn">
         Search
       </button>
     </div>
 
-    <section class="container mx-auto px-4 py-20 text-center">
+    <section id="how" class="container mx-auto px-4 py-20 text-center">
       <div class="mb-16">
-        <div
-          class="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-widest text-blue-600 border border-gray-200 rounded-full">
+        <div class="inline-block px-4 py-1.5 mb-4 text-xs font-semibold uppercase tracking-widest text-blue-600 border border-gray-200 rounded-full">
           How it works
         </div>
         <h2 class="text-4xl font-semibold text-gray-800">
           Rent with following <span class="text-blue-600">3 easy steps</span>
         </h2>
       </div>
-
-      <div class="flex flex-col md:flex-row justify-evenly items-center space-y-10 md:space-y-0">
-        <div class="flex flex-col items-center max-w-xs">
+      <div class="flex flex-col md:flex-row justify-evenly items-center space-y-10 md:space-y-0 how-cards">
+        <div class="flex flex-col items-center max-w-xs icon-card">
           <div class="icon-bg w-20 h-20 rounded-xl flex items-center justify-center mb-6 shadow-md">
             <svg class="w-10 h-10 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
               <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
@@ -193,11 +151,9 @@
           <h3 class="text-xl font-semibold mb-2">Choose location</h3>
           <p class="text-gray-500 text-sm">Pick your preferred car location easily.</p>
         </div>
-
-        <div class="flex flex-col items-center max-w-xs">
+        <div class="flex flex-col items-center max-w-xs icon-card">
           <div class="icon-bg w-20 h-20 rounded-xl flex items-center justify-center mb-6 shadow-md">
-            <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
-              viewBox="0 0 24 24">
+            <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
               <line x1="16" y1="2" x2="16" y2="6"></line>
               <line x1="8" y1="2" x2="8" y2="6"></line>
@@ -207,14 +163,10 @@
           <h3 class="text-xl font-semibold mb-2">Select dates</h3>
           <p class="text-gray-500 text-sm">Pick your pickup and return dates.</p>
         </div>
-
-        <div class="flex flex-col items-center max-w-xs">
+        <div class="flex flex-col items-center max-w-xs icon-card">
           <div class="icon-bg w-20 h-20 rounded-xl flex items-center justify-center mb-6 shadow-md">
-            <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
-              viewBox="0 0 24 24">
-              <path
-                d="M17 17h2a1 1 0 011 1v0a1 1 0 01-1 1h-2v-2zM5 17h2v2H5a1 1 0 010-2zm13-8h2a1 1 0 010 2h-2v-2zM4 9h2v2H4a1 1 0 010-2zm8-4l-2.45 5.25H14.45L12 5zm-3.5 10a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm7 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z">
-              </path>
+            <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M17 17h2a1 1 0 011 1v0a1 1 0 01-1 1h-2v-2zM5 17h2v2H5a1 1 0 010-2zm13-8h2a1 1 0 010 2h-2v-2zM4 9h2v2H4a1 1 0 010-2zm8-4l-2.45 5.25H14.45L12 5zm-3.5 10a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm7 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>
             </svg>
           </div>
           <h3 class="text-xl font-semibold mb-2">Book your car</h3>
@@ -223,27 +175,76 @@
       </div>
     </section>
 
-    <div class="logo-strip py-16 mt-16 border-t border-gray-100">
-      <div class="container mx-auto px-4 relative overflow-hidden">
-        <div class="brand-track">
-          <div class="brand-name">Honda</div>
-          <div class="brand-name">Jaguar</div>
-          <div class="brand-name">Nissan</div>
-          <div class="brand-name">Volvo</div>
-          <div class="brand-name">Audi</div>
-          <div class="brand-name">Acura</div>
-          <div class="brand-name">Tesla</div>
-          <div class="brand-name">BMW</div>
-          <div class="brand-name">Ford</div>
-          <div class="brand-name">Lexus</div>
-        </div>
-      </div>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Lobster&family=Montserrat:wght@600&family=Oswald:wght@500&family=Pacifico&family=Raleway:wght@700&family=Ubuntu:wght@700&family=Poppins:wght@600&family=Playfair+Display:wght@700&family=Indie+Flower&family=Comfortaa:wght@700&display=swap" rel="stylesheet">
+
+<div class="logo-strip py-16 mt-16 border-t border-gray-100 bg-gray-50">
+  <div class="container mx-auto px-4 relative overflow-hidden">
+    <div class="brand-track flex whitespace-nowrap animate-scroll">
+      <div class="brand-name mx-12 font-roboto">Honda</div>
+      <div class="brand-name mx-12 font-lobster">Jaguar</div>
+      <div class="brand-name mx-12 font-montserrat">Nissan</div>
+      <div class="brand-name mx-12 font-oswald">Volvo</div>
+      <div class="brand-name mx-12 font-pacifico">Audi</div>
+      <div class="brand-name mx-12 font-raleway">Acura</div>
+      <div class="brand-name mx-12 font-ubuntu">Tesla</div>
+      <div class="brand-name mx-12 font-poppins">BMW</div>
+      <div class="brand-name mx-12 font-playfair">Ford</div>
+      <div class="brand-name mx-12 font-indie">Lexus</div>
+
+      <div class="brand-name mx-12 font-roboto">Honda</div>
+      <div class="brand-name mx-12 font-lobster">Jaguar</div>
+      <div class="brand-name mx-12 font-montserrat">Nissan</div>
+      <div class="brand-name mx-12 font-oswald">Volvo</div>
+      <div class="brand-name mx-12 font-pacifico">Audi</div>
+      <div class="brand-name mx-12 font-raleway">Acura</div>
+      <div class="brand-name mx-12 font-ubuntu">Tesla</div>
+      <div class="brand-name mx-12 font-poppins">BMW</div>
+      <div class="brand-name mx-12 font-playfair">Ford</div>
+      <div class="brand-name mx-12 font-indie">Lexus</div>
     </div>
   </div>
+</div>
+
+<style>
+
+  .font-roboto { font-family: 'Roboto', sans-serif; }
+  .font-lobster { font-family: 'Lobster', cursive; }
+  .font-montserrat { font-family: 'Montserrat', sans-serif; }
+  .font-oswald { font-family: 'Oswald', sans-serif; }
+  .font-pacifico { font-family: 'Pacifico', cursive; }
+  .font-raleway { font-family: 'Raleway', sans-serif; }
+  .font-ubuntu { font-family: 'Ubuntu', sans-serif; }
+  .font-poppins { font-family: 'Poppins', sans-serif; }
+  .font-playfair { font-family: 'Playfair Display', serif; }
+  .font-indie { font-family: 'Indie Flower', cursive; }
+
+  .brand-name {
+    font-size: 2rem;
+    font-weight: 700;
+    display: inline-block;
+    transition: transform 0.3s, color 0.3s;
+  }
+
+  .brand-name:hover {
+    transform: scale(1.2);
+    color: #1E3A8A; 
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-scroll {
+    display: flex;
+    animation: scroll 25s linear infinite;
+  }
+</style>
 
 
-  <main class="py-8">
-        <section class="relative bg-white overflow-hidden rounded-lg">
+    <main class="py-8">
+        <section id="why" class="relative bg-white overflow-hidden rounded-lg">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-32 ">
 
 
@@ -270,16 +271,8 @@
               
                         <div class=" mt-12 flex items-start gap-4">
                             <div class="flex-none">
-                                <div
-                                    class="mt-2 w-14 h-14 rounded-lg icon-pill bg-blue-50 flex items-center justify-center">
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-sky-600" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <rect x="3" y="11" width="18" height="10" rx="2" stroke-width="1.5"></rect>
-                                        <path d="M7 11V8a5 5 0 0110 0v3" stroke-width="1.5" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                        </path>
-                                    </svg>
+                                <div class="mt-2 w-14 h-14 rounded-lg bg-blue-50 flex items-center justify-center">
+                                    <img src="icon1.jpg" alt="" class="h-6 w-8">
                                 </div>
                             </div>
                             <div class="flex-1">
@@ -293,16 +286,8 @@
                    
                         <div class="flex items-start gap-4">
                             <div class="flex-none">
-                                <div
-                                    class="mt-2 w-14 h-14 rounded-lg icon-pill bg-blue-50 flex items-center justify-center">
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-sky-600" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path d="M12 12a4 4 0 100-8 4 4 0 000 8z" stroke-width="1.5"></path>
-                                        <path d="M6 20a6 6 0 0112 0" stroke-width="1.5" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                        </path>
-                                    </svg>
+                                <div class="mt-2 w-14 h-14 rounded-lg bg-blue-50 flex items-center justify-center">
+                                    <img src="icon2.jpg" alt="" class="h-6 w-8">
                                 </div>
                             </div>
                             <div class="flex-1">
@@ -317,16 +302,8 @@
             
                         <div class="flex items-start gap-4">
                             <div class="flex-none">
-                                <div
-                                    class="mt-2 w-14 h-14 rounded-lg icon-pill bg-blue-50 flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-sky-600" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path d="M3 7h13l4 4v6" stroke-width="1.5" stroke-linecap="round"
-                                            stroke-linejoin="round"></path>
-                                        <circle cx="7.5" cy="18.5" r="1.5" stroke-width="1.5"></circle>
-                                        <circle cx="18.5" cy="18.5" r="1.5" stroke-width="1.5"></circle>
-                                    </svg>
-
+                                <div class="mt-2 w-14 h-14 rounded-lg bg-blue-50 flex items-center justify-center">
+                                    <img src="icon3.jpg" alt="" class="h-6 w-8">
                                 </div>
                             </div>
                             <div class="flex-1">
@@ -341,18 +318,8 @@
             
                         <div class="flex items-start gap-4">
                             <div class="flex-none">
-                                <div
-                                    class="mt-2 w-14 h-14 rounded-lg icon-pill bg-blue-50 flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-sky-600" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path d="M3 11a9 9 0 0118 0v5a2 2 0 01-2 2h-1.5a1.5 1.5 0 01-1.5-1.5V15"
-                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                        </path>
-                                        <path d="M3 11v3a2 2 0 002 2h.5" stroke-width="1.5" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                        </path>
-                                    </svg>
-
+                                <div class="mt-2 w-14 h-14 rounded-lg bg-blue-50 flex items-center justify-center">
+                                    <img src="icon4.jpg" alt="" class="h-6 w-8">
                                 </div>
                             </div>
                             <div class="flex-1">
@@ -372,7 +339,7 @@
         </section>
     </main>
 
-<section class="bg-white py-20">
+<section id="deals" class="bg-white py-20">
   <div class="container mx-auto px-4 text-center">
 
     <div class="mb-16">
@@ -516,11 +483,144 @@
     </div>
   </div>
 </section>
+<script>
+
+    
+
+  gsap.registerPlugin(ScrollTrigger);
 
 
+  gsap.from("#why img", {
+    x: -100,
+    opacity: 0,
+    duration: 1,
+    ease: "power3.out",
+    scrollTrigger: { trigger: "#why", start: "top 80%" }
+  });
+
+  gsap.from("#why h2, #why span", {
+    x: 100,
+    opacity: 0,
+    duration: 1,
+    stagger: 0.2,
+    ease: "power3.out",
+    scrollTrigger: { trigger: "#why", start: "top 80%" }
+  });
+
+  gsap.from("#why .flex.items-start", {
+    y: 50,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.3,
+    ease: "power3.out",
+    scrollTrigger: { trigger: "#why", start: "top 80%" }
+  });
 
 
-    <section style="background-color: #f8f9fa; padding: 50px 0;">
+</script>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from(".hero-text h1", { x: -100, opacity: 0, duration: 1, ease: "power3.out" });
+    gsap.from(".hero-text p", { x: -100, opacity: 0, duration: 1, delay: 0.3, ease: "power3.out" });
+    gsap.from(".hero-text .app-badge", { y: 50, opacity: 0, duration: 1, stagger: 0.2, delay: 0.6, ease: "back.out(1.7)" });
+    gsap.from(".hero-car", { scale: 0.8, opacity: 0, duration: 1, delay: 0.5, ease: "power3.out" });
+
+
+    gsap.from(".search-section > div, .search-section button", {
+      y: 50,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.2,
+      scrollTrigger: { trigger: ".search-section", start: "top 80%" }
+    });
+
+
+    gsap.from(".icon-card", {
+      y: 50,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.3,
+      scrollTrigger: { trigger: ".how-cards", start: "top 80%" }
+    });
+
+
+    const track = document.querySelector(".brand-track");
+    const container = track.parentNode;
+    const clone = track.cloneNode(true);
+    container.appendChild(clone);
+    clone.style.position = "absolute";
+    clone.style.top = "0";
+    clone.style.left = track.scrollWidth + "px";
+    const distance = track.scrollWidth;
+    gsap.to([track, clone], { x: -distance, duration: 30, ease: "none", repeat: -1, modifiers: { x: gsap.utils.wrap(-distance, 0) } });
+  </script>
+
+
+<section class="py-16 px-4 sm:px-8 lg:px-16">
+        <div class="text-center mb-12 fade-up">
+            <span
+                class="bg-blue-100 text-blue-600 text-sm font-medium px-4 py-1 rounded-full uppercase">Testimonials</span>
+            <h2 class="text-3xl sm:text-4xl font-bold mt-4 text-gray-800">What people say about us?</h2>
+        </div>
+
+        <div class="flex flex-col lg:flex-row justify-between items-stretch gap-6">
+
+            <div
+                class="bg-white rounded-2xl shadow-md p-6 flex-1 h-[450px] flex flex-col justify-center text-gray-700 fade-up delay-1 hover-lift">
+                <div class="text-yellow-400 text-xl mb-3">★★★★★</div>
+                <p class="text-lg mb-4">"I've been using your services for months. Your service is great, I will
+                    continue to use your service."</p>
+                <p class="font-semibold mt-auto text-xl">Olivia Wilson</p>
+                <p class="text-sm text-gray-500">From New York, US</p>
+            </div>
+
+            <div
+                class="flex-[3.5] bg-white rounded-2xl shadow-md flex overflow-hidden h-[450px] fade-up delay-2 hover-lift">
+                <img src="person3.jpg" alt="Charlie" class="w-1/2 object-cover">
+                <div class="p-6 flex flex-col justify-center">
+                    <p class="font-semibold text-6xl mb-2">5.0 stars</p>
+                    <div class="text-yellow-400 text-xl mb-3">★★★★★</div>
+                    <p class="mt-2 text-lg mb-4">"I feel very secure when using caretrail's services. Your customer care
+                        team
+                        is very enthusiastic and the driver is always on time."</p>
+                    <p class="mt-2 text-lg font-semibold">Charlie Johnson</p>
+                    <p class="text-sm text-gray-500">From New York, US</p>
+                </div>
+            </div>
+
+            <div
+                class="bg-white rounded-2xl shadow-md flex-1 h-[450px] flex flex-col justify-center text-gray-700 fade-up delay-3 hover-lift">
+                <img src="person4.jpg" alt="Emma" class="rounded-2xl object-cover h-full w-full">
+            </div>
+
+        </div>
+    </section>
+    <script>
+  const animatedElements = document.querySelectorAll('.fade-up');
+
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+          entry.target.style.opacity = 1;
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 } 
+  );
+
+  animatedElements.forEach(el => {
+    el.style.opacity = 0;
+    el.style.animationPlayState = 'paused';
+    observer.observe(el);
+  });
+</script>
+
+    <section id="apps" style="background-color: #f8f9fa; padding: 50px 0;">
         <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
             <div style="flex: 1; padding: 20px;">
                 <p style="
@@ -616,7 +716,10 @@
                 <div style="width: 15%; min-width: 150px; margin-bottom: 30px;">
                     <h3 style="color: white; font-size: 1.1em; margin-bottom: 20px;">Follow Us</h3>
                     <div style="display: flex; gap: 15px;">
-                        <a href="#" style="color: white; font-size: 1.5em; text-decoration: none;">&#x1F4F7;</a> <a href="#" style="color: white; font-size: 1.5em; text-decoration: none;">&#x1F3A5;</a> </div>
+                        <img src="yt.svg"  class="w-6 h-6 rounded bg-white">
+                        <img src="insta.svg" class="w-6 h-6 rounded bg-white">
+                        <img src="facebook.svg" class="w-6 h-6 rounded bg-white">
+                    </div>
                 </div>
 
             </div>
@@ -627,36 +730,53 @@
         </div>
     </footer>
 
+    <script>
+  gsap.registerPlugin(ScrollTrigger);
 
+  
+  gsap.from("#apps div:first-child", {
+    x: -100,
+    opacity: 0,
+    duration: 1,
+    ease: "power3.out",
+    scrollTrigger: { trigger: "#apps", start: "top 80%" }
+  });
 
-  <script>
-    const track = document.querySelector(".brand-track");
-    const container = track.parentNode;
+  gsap.from("#apps div:last-child img", {
+    x: 100,
+    opacity: 0,
+    duration: 1,
+    ease: "power3.out",
+    scrollTrigger: { trigger: "#apps", start: "top 80%" }
+  });
 
-    const clone = track.cloneNode(true);
-    container.appendChild(clone);
-    clone.style.position = "absolute";
-    clone.style.top = "0";
-    clone.style.left = track.scrollWidth + "px";
+  gsap.from("#apps .flex img", {
+    scale: 0.8,
+    opacity: 0,
+    duration: 0.5,
+    stagger: 0.2,
+    ease: "back.out(1.7)",
+    scrollTrigger: { trigger: "#apps", start: "top 75%" }
+  });
 
-    function startMarquee() {
-      const distance = track.scrollWidth;
-      const duration = 30; 
+ 
+  gsap.from("footer div[style*='width']", {
+    y: 50,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.2,
+    ease: "power3.out",
+    scrollTrigger: { trigger: "footer", start: "top 90%" }
+  });
 
-      gsap.to([track, clone], {
-        x: -distance,
-        duration: duration,
-        ease: "none",
-        repeat: -1,
-        modifiers: {
-          x: gsap.utils.wrap(-distance, 0),
-        },
-      });
-    }
+  gsap.from("footer div[style*='text-align: left']", {
+    opacity: 0,
+    y: 20,
+    duration: 0.8,
+    ease: "power3.out",
+    scrollTrigger: { trigger: "footer", start: "top 95%" }
+  });
+</script>
 
-    startMarquee();
-  </script>
 </body>
 </html>
-
-
